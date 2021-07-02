@@ -1,0 +1,113 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SuccesUserType {
+  Success: Boolean!
+  msg: String!
+}
+
+type UserType {
+  _id: String!
+  email: String
+  name: String
+  inCome: Float
+}
+
+type tokenResponse {
+  expiresIn: String
+  token: String
+  success: Boolean
+  msg: String
+  id: String!
+  email: String!
+}
+
+type Expence {
+  name: String!
+  currency: currency!
+  price: Float!
+  userId: String
+  wallet: String
+  receipt: [String!]
+}
+
+enum currency {
+  TND
+  AUD
+  USD
+}
+
+type Wallet {
+  id: String!
+  name: String!
+}
+
+type Query {
+  getUsers: [UserType!]!
+  getUser(id: String!): UserType!
+  findUserByToken(token: String!): UserType!
+  expence(id: Int!): Expence!
+  wallet(id: Int!): Wallet!
+}
+
+type Mutation {
+  login(input: AuthInput!): tokenResponse!
+  createUser(input: userInput!): SuccesUserType!
+  deleteUser(id: String!): SuccesUserType!
+  updatePassword(updateUserPassword: updateUserPassword!, token: String!): SuccesUserType!
+  createExpence(createExpenceInput: CreateExpenceInput!): Expence!
+  updateExpence(updateExpenceInput: UpdateExpenceInput!): Expence!
+  removeExpence(id: Int!): Expence!
+  createWallet(createWalletInput: CreateWalletInput!): Wallet!
+  updateWallet(updateWalletInput: UpdateWalletInput!): Wallet!
+  removeWallet(id: Int!): Wallet!
+}
+
+input AuthInput {
+  email: String!
+  password: String!
+}
+
+input userInput {
+  name: String!
+  email: String!
+  password: String
+  inCome: Float
+}
+
+input updateUserPassword {
+  password: String!
+}
+
+input CreateExpenceInput {
+  name: String!
+  currency: currency!
+  price: Float!
+  userId: String
+  wallet: String
+  receipt: [String!]
+}
+
+input UpdateExpenceInput {
+  name: String
+  currency: currency
+  price: Float
+  userId: String
+  wallet: String
+  receipt: [String!]
+  id: Int!
+}
+
+input CreateWalletInput {
+  name: String!
+}
+
+input UpdateWalletInput {
+  name: String
+  id: Int!
+}
+
+type Subscription {
+  userDeleted: UserType!
+}

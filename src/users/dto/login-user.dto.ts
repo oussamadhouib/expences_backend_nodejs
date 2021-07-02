@@ -1,5 +1,4 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Role } from './create-user.dto';
 
 @ObjectType()
 export class LoginType {
@@ -23,6 +22,4 @@ export class tokenResponse {
   readonly id: string;
   @Field()
   readonly email: string;
-  @Field()
-  readonly role: Role;
 }

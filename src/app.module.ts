@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { MediaModule } from './media/media.module';
 import { ExpenceModule } from './expence/expence.module';
+import { WalletModule } from './wallet/wallet.module';
 
 @Module({
   imports: [
@@ -13,17 +14,12 @@ import { ExpenceModule } from './expence/expence.module';
     AuthModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
-      subscriptions: {
-        onConnect: (connectionParams: any, websocket, context) => {
-          context.request.headers.authorization =
-            connectionParams?.Authorization;
-        },
-      },
       context: ({ req }) => ({ req }),
       installSubscriptionHandlers: true,
     }),
     MongooseModule.forRoot(process.env.URI),
     ExpenceModule,
+    WalletModule,
   ],
   controllers: [AppController],
   providers: [AppService],
